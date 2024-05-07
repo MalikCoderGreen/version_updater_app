@@ -77,7 +77,7 @@ class HelloWorld(QWidget):
         self.setWindowTitle("MY AWESOME NEW TITLE!")
 
         # Create a label widget
-        self.label = QLabel("HELLO FROM Malik's WORLD", self)
+        self.label = QLabel("HELLO FROM BOOZ's WORLD", self)
 
         # Center the label in the window
         self.label.setAlignment(Qt.AlignCenter)
