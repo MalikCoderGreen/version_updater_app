@@ -1,4 +1,4 @@
-import requests
+import requests, sys
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QMessageBox
 
@@ -42,10 +42,10 @@ class HelloWorld(QWidget):
         super().__init__()
 
         # Set window title
-        self.setWindowTitle("Hello World!")
+        self.setWindowTitle("Hello Wurld!")
 
         # Create a label widget
-        self.label = QLabel("Hello World!", self)
+        self.label = QLabel("Hello Wurld!", self)
 
         # Center the label in the window
         self.label.setAlignment(Qt.AlignCenter)
