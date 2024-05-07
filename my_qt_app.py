@@ -69,10 +69,10 @@ class HelloWorld(QWidget):
         super().__init__()
 
         # Set window title
-        self.setWindowTitle("Hello Wurld!")
+        self.setWindowTitle("MY AWESOME NEW TITLE!")
 
         # Create a label widget
-        self.label = QLabel("Hello Wurld!", self)
+        self.label = QLabel("HELLO FROM LANDI'S WORLD", self)
 
         # Center the label in the window
         self.label.setAlignment(Qt.AlignCenter)
