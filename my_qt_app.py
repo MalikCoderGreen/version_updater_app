@@ -1,4 +1,5 @@
-import requests, sys
+import requests, sys, subprocess
+import platform
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QMessageBox
 
@@ -16,13 +17,39 @@ def check_for_updates():
         latest_version = response.text.strip()
 
         # Replace with your logic to get current version (e.g., from a file)
-        current_version = "1.0.0"  # Placeholder version
-
+        version_file = "version_info.txt"
+        try:
+            with open(version_file, "r") as file:
+                current_version = file.readline().strip()
+        except IOError:
+            raise IOError(f"Error opening version file: {version_file}")
+    
+        # Display an error message to the user
         if latest_version != current_version:
             message_box = QMessageBox()
             message_box.setWindowTitle("Update Available")
             message_box.setText(f"A new version ({latest_version}) is available! You're currently on version {current_version}.")
             message_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+            try:
+                # Replace with your Git repository URL
+                repo_url = f"https://github.com/{GITHUB_USERNAME}/{REPOSITORY_NAME}.git"
+                if message_box.exec_() == QMessageBox.Yes:
+                    subprocess.run(["git", "pull", repo_url])
+                    # Option 1: Restart using a separate script (recommended)
+                    # Create a separate script (e.g., restart.bat or restart.sh) to relaunch the application
+                    if platform.system() == "Windows":
+                        subprocess.run(["path/to/restart.bat"])  # Windows example
+                    else:
+                        subprocess.run(["path/to/restart.sh"])  # Linux/macOS example
+                        print("Update pulled successfully. Restarting application...")
+                else:
+                    print("User declined update")
+            except subprocess.CalledProcessError as e:
+                print(e.output)
+            
+
+            
             # Add an optional "Remind Later" button (custom button)
             # remind_later_button = message_box.addButton("Remind Later", QMessageBox.NoRole)
             # You can connect a signal to this button for later reminder functionality
