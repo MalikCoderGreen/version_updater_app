@@ -39,9 +39,9 @@ def check_for_updates():
                     # Option 1: Restart using a separate script (recommended)
                     # Create a separate script (e.g., restart.bat or restart.sh) to relaunch the application
                     if platform.system() == "Windows":
-                        subprocess.run(["path/to/restart.bat"])  # Windows example
+                        subprocess.run(["restart.bat"])  # Windows example
                     else:
-                        subprocess.run(["path/to/restart.sh"])  # Linux/macOS example
+                        subprocess.run(["restart.sh"])  # Linux/macOS example
                         print("Update pulled successfully. Restarting application...")
                 else:
                     print("User declined update")
@@ -72,7 +72,7 @@ class HelloWorld(QWidget):
         self.setWindowTitle("MY AWESOME NEW TITLE!")
 
         # Create a label widget
-        self.label = QLabel("HELLO FROM LANDI'S WORLD", self)
+        self.label = QLabel("HELLO FROM WAYNE'S WORLD", self)
 
         # Center the label in the window
         self.label.setAlignment(Qt.AlignCenter)
@@ -82,7 +82,7 @@ class HelloWorld(QWidget):
 
         # Schedule update check every minute
         self.update_timer = QTimer(self)
-        self.update_timer.setInterval(60000)  # Milliseconds in a minute
+        self.update_timer.setInterval(600)  # Milliseconds in a minute
         self.update_timer.timeout.connect(check_for_updates)
         self.update_timer.start()
 
