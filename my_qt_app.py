@@ -35,15 +35,24 @@ class HelloWorld(QWidget):
                 try:
                     # Replace with your Git repository URL
                     repo_url = f"https://github.com/{GITHUB_USERNAME}/{REPOSITORY_NAME}.git"
-                    button_pressed = message_box.exec_()
+                    button_pressed = message_box.exec_()     
                     if button_pressed == QMessageBox.Yes:
+                        # update the existing version file
+                        try:
+                            with open(version_file, "w") as file:
+                                file.write(latest_version)
+                        except IOError:
+                            raise IOError(f"Error writing to version file: {version_file}")
+                        
                         subprocess.run(["git", "pull", repo_url])
                         # Option 1: Restart using a separate script (recommended)
+                        self.close()
                         # Create a separate script (e.g., restart.bat or restart.sh) to relaunch the application
                         if platform.system() == "Windows":
-                            subprocess.run(["restart.bat"])  # Windows example
+                            subprocess.Popen(["restart.bat"])  # Windows example
+                    
                         else:
-                            subprocess.run(["restart.sh"])  # Linux/macOS example
+                            subprocess.Popen(["restart.sh"])  # Linux/macOS example
                             print("Update pulled successfully. Restarting application...")
                     elif button_pressed == QMessageBox.No:
                         print("User declined update")
@@ -68,7 +77,7 @@ class HelloWorld(QWidget):
         self.setWindowTitle("MY AWESOME NEW TITLE!")
 
         # Create a label widget
-        self.label = QLabel("HELLO FROM WAYNE'S WORLD", self)
+        self.label = QLabel("HELLO FROM Malik's WORLD", self)
 
         # Center the label in the window
         self.label.setAlignment(Qt.AlignCenter)
