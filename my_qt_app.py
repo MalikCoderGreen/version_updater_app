@@ -38,11 +38,11 @@ class HelloWorld(QWidget):
                     button_pressed = message_box.exec_()     
                     if button_pressed == QMessageBox.Yes:
                         # update the existing version file
-                        try:
+                        """try:
                             with open(version_file, "w") as file:
                                 file.write(latest_version)
                         except IOError:
-                            raise IOError(f"Error writing to version file: {version_file}")
+                            raise IOError(f"Error writing to version file: {version_file}")"""
                         
                         subprocess.run(["git", "pull", repo_url])
                         # Option 1: Restart using a separate script (recommended)
